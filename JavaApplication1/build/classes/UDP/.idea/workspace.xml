@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="465f9bac-bde2-489d-ab91-3a2911e19404" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/Login$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/Login$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/Login.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/Login.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/Menu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/Menu$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/Menu$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/Menu$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/Menu$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/Menu$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/Menu$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/Menu$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/Menu$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/Menu$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/Menu$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/Menu$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/Menu$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/Menu$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/Menu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/Menu.form" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/Menu.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/MouseGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/MouseGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/MouseGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/MouseGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/RegisterGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/RegisterGUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/RegisterGUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/RegisterGUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/RegisterGUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/RegisterGUI$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/RegisterGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/RegisterGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ComputerShop/RegisterGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/../ComputerShop/RegisterGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/ComputerShop/Login.form" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/ComputerShop/LoginGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/ComputerShop/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/ComputerShop/LoginGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/ComputerShop/Menu.form" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/ComputerShop/Menu.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/ComputerShop/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/ComputerShop/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/ComputerShop/MouseGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/ComputerShop/MouseGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/ComputerShop/MouseGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/ComputerShop/MouseGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/ComputerShop/RegisterGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/ComputerShop/RegisterGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/ComputerShop/RegisterGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/ComputerShop/RegisterGUI.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files (x86)\IntelliJ IDEA Community Edition 2020.2.1\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ziuX81cMRh7c7HKTOhtfgZ9tCz" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="465f9bac-bde2-489d-ab91-3a2911e19404" name="Default Changelist" comment="" />
+      <created>1634643266828</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1634643266828</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
