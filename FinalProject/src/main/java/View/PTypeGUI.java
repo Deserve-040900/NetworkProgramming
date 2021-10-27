@@ -28,12 +28,11 @@ public class PTypeGUI extends javax.swing.JFrame {
     public PTypeGUI() {
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            PTypeModify c = (PTypeModify)r.lookup("PTypeModify");
             initComponents();
             this.setLocationRelativeTo(null);
             tbm = (DefaultTableModel) tbType.getModel();
             showType();
-        } catch (NotBoundException | RemoteException e) {
+        } catch (RemoteException e) {
             java.util.logging.Logger.getLogger(PTypeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
     }
@@ -41,15 +40,15 @@ public class PTypeGUI extends javax.swing.JFrame {
     public void showType(){
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            PTypeModify c = (PTypeModify)r.lookup("PTypeModify");
+            PTypeModify c = (PTypeModify)r.lookup("rmiPType");
             type = c.findAll();
             tbm.setRowCount(0);
             
-            for (PType pType : type) {
+            type.forEach(pType -> {
                 tbm.addRow(new Object[] {
-                    tbm.getRowCount() + 1, pType.getName()
+                    tbm.getRowCount() + 1, pType.getType_name()
                 });
-            }
+            });
         } catch (NotBoundException | RemoteException e) {
             java.util.logging.Logger.getLogger(PTypeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
@@ -150,9 +149,9 @@ public class PTypeGUI extends javax.swing.JFrame {
                     .addComponent(btnExit)
                     .addComponent(btnDelete)
                     .addComponent(btnAdd))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -160,20 +159,14 @@ public class PTypeGUI extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        try {
-            Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            RegisterModify c = (RegisterModify)r.lookup("RegisterModify");
-            dispose();
-        } catch (NotBoundException | RemoteException e) {
-            java.util.logging.Logger.getLogger(UserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
-        }
+        this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            PTypeModify c = (PTypeModify)r.lookup("PTypeModify");
+            PTypeModify c = (PTypeModify)r.lookup("rmiPType");
             String name = txtTypeName.getText();
 
             PType pt = new PType(name);
@@ -189,7 +182,7 @@ public class PTypeGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            PTypeModify c = (PTypeModify)r.lookup("PTypeModify");
+            PTypeModify c = (PTypeModify)r.lookup("rmiPType");
             int selectedIndex = tbType.getSelectedRow();
             if(selectedIndex >= 0){
                 PType cpt = type.get(selectedIndex);

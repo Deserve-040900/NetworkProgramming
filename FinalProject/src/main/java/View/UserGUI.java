@@ -26,12 +26,11 @@ public class UserGUI extends javax.swing.JFrame {
     public UserGUI() {
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            RegisterModify c = (RegisterModify)r.lookup("RegisterModify");
             initComponents();
             this.setLocationRelativeTo(null);
             tbm = (DefaultTableModel) tbUser.getModel();
             showUser();
-        } catch (NotBoundException | RemoteException e) {
+        } catch (RemoteException e) {
             java.util.logging.Logger.getLogger(UserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
     }
@@ -39,7 +38,7 @@ public class UserGUI extends javax.swing.JFrame {
     public void showUser(){
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            RegisterModify c = (RegisterModify)r.lookup("RegisterModify");
+            RegisterModify c = (RegisterModify)r.lookup("rmiRegister");
             reg = c.findAll();
             tbm.setRowCount(0);
             
@@ -165,7 +164,7 @@ public class UserGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            RegisterModify c = (RegisterModify)r.lookup("RegisterModify");
+            RegisterModify c = (RegisterModify)r.lookup("rmiRegister");
             View.RegisterGUI obj = new View.RegisterGUI();
             obj.setVisible(true);
         } catch (NotBoundException | RemoteException e) {
@@ -175,20 +174,14 @@ public class UserGUI extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        try {
-            Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            RegisterModify c = (RegisterModify)r.lookup("RegisterModify");
-            dispose();
-        } catch (NotBoundException | RemoteException e) {
-            java.util.logging.Logger.getLogger(UserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
-        }  
+        this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            RegisterModify c = (RegisterModify)r.lookup("RegisterModify");
+            RegisterModify c = (RegisterModify)r.lookup("rmiRegister");
             String input = txtSearch.getText();
             if(input != null && input.length() > 0){
                 reg = c.searchUsername(input);
@@ -211,7 +204,7 @@ public class UserGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            RegisterModify c = (RegisterModify)r.lookup("RegisterModify");
+            RegisterModify c = (RegisterModify)r.lookup("rmiRegister");
             int selectedIndex = tbUser.getSelectedRow();
             if(selectedIndex >= 0){
                 Register cpt = reg.get(selectedIndex);

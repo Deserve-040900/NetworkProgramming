@@ -13,18 +13,9 @@ import java.sql.*;
  * @author Xuan040900
  */
 public class ConnectDB {
-    public static Connection getConnect(){
-//        String url = "jdbc:mysql://localhost:3306/computershop";
-//        var user = "root";
-//        var password = "";
-//        try(Connection con = DriverManager.getConnection(url, user, password)){
-//            System.out.println("Connecting Successful");
-//            System.out.println(con.getCatalog());
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+    public static Connection getConnect(){        
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            java.lang.Class.forName("com.mysql.cj.jdbc.Driver");
             String unicode = "useSSL=false&autoReconnect=true&useUnicode=yes&characterEncoding=UTF-8";
             return DriverManager.getConnection("jdbc:mysql://localhost:3306/computershop?" + unicode, "root", "");
         } catch (Exception ex) {
@@ -33,7 +24,14 @@ public class ConnectDB {
             throw new RuntimeException(ex);
         }
     }
-    public static void main(String[] args) {
-        
-    }
+//    public static void main(String[] args) {
+//        String url = "jdbc:mysql://localhost:3306/computershop";
+//        var user = "root";
+//        var password = "";
+//        try(Connection con = DriverManager.getConnection(url, user, password)){
+//            System.out.println("Connecting Successful");
+//            System.out.println(con.getCatalog());
+//        } catch (SQLException ex) {
+//        }
+//    }
 }

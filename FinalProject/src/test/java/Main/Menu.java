@@ -10,7 +10,7 @@ import View.ProductGUI;
 import View.UserGUI;
 import View.LoginGUI;
 import View.RegisterGUI;
-import View.ViewAllGUI;
+import View.ViewAll;
 /**
  *
  * @author Xuan040900
@@ -151,7 +151,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void ViewAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAllActionPerformed
         // TODO add your handling code here:
-        ViewAllGUI obj = new ViewAllGUI();
+        ViewAll obj = new ViewAll();
         this.add(obj);
         obj.setVisible(true);
     }//GEN-LAST:event_ViewAllActionPerformed

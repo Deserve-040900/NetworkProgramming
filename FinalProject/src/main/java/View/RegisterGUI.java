@@ -190,12 +190,7 @@ public class RegisterGUI extends javax.swing.JFrame {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-        try {
-            Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            dispose();
-        } catch (RemoteException e) {
-            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
-        }
+        this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
@@ -207,7 +202,7 @@ public class RegisterGUI extends javax.swing.JFrame {
 //        } catch (Exception e) {}
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            RegisterModify c = (RegisterModify) r.lookup("RegisterModify");
+            RegisterModify c = (RegisterModify) r.lookup("rmiRegister");
 
             String username = txtUsername.getText();
             String email = txtEmail.getText();
@@ -222,6 +217,7 @@ public class RegisterGUI extends javax.swing.JFrame {
                     System.out.println(box);
                     if (box == JOptionPane.YES_OPTION) {
                         JOptionPane.showMessageDialog(null, "Sign Up Success");
+                        dispose();
                     } else {
                         return;
                     }
@@ -241,7 +237,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            RegisterModify c = (RegisterModify) r.lookup("RegisterModify");
+            RegisterModify c = (RegisterModify) r.lookup("rmiRegister");
 
             LoginGUI obj = new LoginGUI();
             obj.setVisible(true);

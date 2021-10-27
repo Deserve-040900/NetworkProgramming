@@ -17,6 +17,6 @@ public interface ProductModify extends Remote{
     public void insert(Product pr) throws RemoteException;
     public void update(Product p) throws RemoteException;
     public void delete(int id) throws RemoteException;
-    public List<Product> searchByProducer () throws RemoteException;
-    public List<Product> searchByID () throws RemoteException;
+    public List<Product> searchByProducer (String producer) throws RemoteException;
+    public List<Product> searchByID (int id) throws RemoteException;
 }

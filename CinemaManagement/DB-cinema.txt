@@ -1,0 +1,75 @@
+CREATE TABLE `account` (
+  `ID` int(11) NOT NULL,
+  `username` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE `film` (
+  `ID` int(11) NOT NULL,
+  `name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `price` int(11) NOT NULL,
+  `dramatic_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE `invoice` (
+  `ID` int(11) NOT NULL,
+  `account_ID` int(11) NOT NULL,
+  `invoice_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `opera_ID` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `total_price` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `orders` (
+  `ID` int(11) NOT NULL,
+  `film_ID` int(11) NOT NULL,
+  `count` int(50) NOT NULL,
+  `invoice_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE `opera` (
+  `ID` int(11) NOT NULL,
+  `opera_name` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `note` text COLLATE utf8_unicode_ci,
+  `status` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+ALTER TABLE `account` 
+  ADD PRIMARY KEY (`ID`);
+ALTER TABLE `film`
+  ADD PRIMARY KEY (`ID`);
+ALTER TABLE `invoice`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `account_ID` (`account_ID`),
+  ADD KEY `opera_id` (`opera_id`);
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `film_ID` (`film_ID`),
+  ADD KEY `invoice_ID` (`invoice_ID`);
+ALTER TABLE `opera`
+  ADD PRIMARY KEY (`ID`);
+
+ALTER TABLE `account`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `film`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+ALTER TABLE `invoice`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `orders`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `opera`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+ALTER TABLE `invoice`
+  ADD CONSTRAINT `invoice_ibfk_1` FOREIGN KEY (`account_ID`) REFERENCES `account` (`ID`),
+   ADD CONSTRAINT `invoice_ibfk_2` FOREIGN KEY (`opera_ID`) REFERENCES `opera` (`ID`);
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`film_ID`) REFERENCES `film` (`ID`),
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`invoice_ID`) REFERENCES `invoice` (`ID`);
+COMMIT;
+
+INSERT INTO `account` (`ID`, `username`, `password`, `name`) VALUES
+(1, 'admin', 'admin', 'Admin');

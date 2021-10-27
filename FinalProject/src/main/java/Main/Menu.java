@@ -37,10 +37,10 @@ public class Menu extends javax.swing.JFrame {
         Register = new javax.swing.JMenuItem();
         Login = new javax.swing.JMenuItem();
         Exit = new javax.swing.JMenuItem();
-        ViewAll = new javax.swing.JMenu();
-        Computer = new javax.swing.JMenuItem();
-        CPU = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        Management = new javax.swing.JMenu();
+        Product = new javax.swing.JMenuItem();
+        User = new javax.swing.JMenuItem();
+        ViewAll = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Computer Shop Management");
@@ -74,34 +74,39 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        ViewAll.setText("Management system");
-        ViewAll.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Management.setText("Management system");
+        Management.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Management.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManagementActionPerformed(evt);
+            }
+        });
+
+        Product.setText("Product");
+        Product.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProductActionPerformed(evt);
+            }
+        });
+        Management.add(Product);
+
+        User.setText("User");
+        User.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserActionPerformed(evt);
+            }
+        });
+        Management.add(User);
+
+        ViewAll.setText("View All");
         ViewAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ViewAllActionPerformed(evt);
             }
         });
+        Management.add(ViewAll);
 
-        Computer.setText("Product");
-        Computer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComputerActionPerformed(evt);
-            }
-        });
-        ViewAll.add(Computer);
-
-        CPU.setText("User");
-        CPU.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CPUActionPerformed(evt);
-            }
-        });
-        ViewAll.add(CPU);
-
-        jMenuItem1.setText("View All");
-        ViewAll.add(jMenuItem1);
-
-        jMenuBar1.add(ViewAll);
+        jMenuBar1.add(Management);
 
         setJMenuBar(jMenuBar1);
 
@@ -124,17 +129,17 @@ public class Menu extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_ExitActionPerformed
 
-    private void ComputerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComputerActionPerformed
+    private void ProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductActionPerformed
         // TODO add your handling code here:
         ProductGUI obj = new ProductGUI();
         obj.setVisible(true);
-    }//GEN-LAST:event_ComputerActionPerformed
+    }//GEN-LAST:event_ProductActionPerformed
 
-    private void CPUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CPUActionPerformed
+    private void UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserActionPerformed
         // TODO add your handling code here:
         UserGUI obj = new UserGUI();
         obj.setVisible(true);
-    }//GEN-LAST:event_CPUActionPerformed
+    }//GEN-LAST:event_UserActionPerformed
 
     private void RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterActionPerformed
         // TODO add your handling code here:
@@ -148,10 +153,13 @@ public class Menu extends javax.swing.JFrame {
         obj.setVisible(true);
     }//GEN-LAST:event_LoginActionPerformed
 
+    private void ManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagementActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ManagementActionPerformed
+
     private void ViewAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAllActionPerformed
         // TODO add your handling code here:
         ViewAllGUI obj = new ViewAllGUI();
-        this.add(obj);
         obj.setVisible(true);
     }//GEN-LAST:event_ViewAllActionPerformed
 
@@ -196,14 +204,14 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem CPU;
-    private javax.swing.JMenuItem Computer;
     private javax.swing.JMenuItem Exit;
     private javax.swing.JMenuItem Login;
+    private javax.swing.JMenu Management;
+    private javax.swing.JMenuItem Product;
     private javax.swing.JMenuItem Register;
-    private javax.swing.JMenu ViewAll;
+    private javax.swing.JMenuItem User;
+    private javax.swing.JMenuItem ViewAll;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }

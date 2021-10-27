@@ -35,26 +35,26 @@ public class ProductCRUD extends UnicastRemoteObject implements ProductModify{
             
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {                
-                Product cpt = new Product(rs.getInt("id"), rs.getString("producer"), rs.getInt("price"), rs.getInt("typeID"));
+                Product cpt = new Product(rs.getInt("PID"), rs.getString("Producer"), rs.getInt("Price"), rs.getInt("TypeID"));
                 com.add(cpt);
             }
         } catch (SQLException e) {
-            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, e);
-        } finally {
-            if(stm != null){
-                try {
-                    stm.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if(con != null){
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+//            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, e);
+//        } finally {
+//            if(stm != null){
+//                try {
+//                    stm.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//            if(con != null){
+//                try {
+//                    con.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
         }
         // the end
         return com;
@@ -68,7 +68,7 @@ public class ProductCRUD extends UnicastRemoteObject implements ProductModify{
             // lay tat ca danh sach may tinh
             con = ConnectDB.getConnect();
             // query
-            String sql = "Insert into product(id, producer, price, typeID) value(?, ?, ?, ?)";
+            String sql = "Insert into product(PID, Producer, Price, TypeID) values(?, ?, ?, ?)";
             preS = con.prepareCall(sql);
             // them du lieu vao data
             preS.setInt(1, pr.getId());
@@ -77,23 +77,23 @@ public class ProductCRUD extends UnicastRemoteObject implements ProductModify{
             preS.setInt(4, pr.getTypeID());
             preS.execute();
             
-        } catch (SQLException e) {
-            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, e);
-        } finally {
-            if(preS != null){
-                try {
-                    preS.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if(con != null){
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+        } catch (SQLException | NumberFormatException e) {
+//            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, e);
+//        } finally {
+//            if(preS != null){
+//                try {
+//                    preS.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//            if(con != null){
+//                try {
+//                    con.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
         }
         // ket thuc
     }
@@ -106,33 +106,32 @@ public class ProductCRUD extends UnicastRemoteObject implements ProductModify{
             // lay tat ca danh sach may tinh
             con = ConnectDB.getConnect();
             // query
-            String sql = "Update product set id=?, producer=?, price=?, type=? Where id = ?";
+            String sql = "Update product set Producer=?, Price=?, TypeID=? Where PID = ?";
             preS = con.prepareStatement(sql);
             // them du lieu vao data
-            preS.setInt(1, p.getId());
-            preS.setString(2, p.getProducer());
-            preS.setInt(3, p.getPrice());
-            preS.setInt(4, p.getTypeID());
-            preS.setInt(5, p.getId());
+            preS.setString(1, p.getProducer());
+            preS.setInt(2, p.getPrice());
+            preS.setInt(3, p.getTypeID());
+            preS.setInt(4, p.getId());
             preS.execute();
             
         } catch (SQLException e) {
-            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, e);
-        } finally {
-            if(preS != null){
-                try {
-                    preS.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if(con != null){
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+//            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, e);
+//        } finally {
+//            if(preS != null){
+//                try {
+//                    preS.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//            if(con != null){
+//                try {
+//                    con.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
         }
         // ket thuc
     }
@@ -145,34 +144,34 @@ public class ProductCRUD extends UnicastRemoteObject implements ProductModify{
             // lay tat ca danh sach may tinh
             con = ConnectDB.getConnect();
             // query
-            String sql = "Delete from product Where id = ?";
+            String sql = "Delete from product Where PID = ?";
             preS = con.prepareCall(sql);
             // them du lieu vao data
             preS.setInt(1, id);
             preS.execute();
             
         } catch (SQLException e) {
-            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, e);
-        } finally {
-            if(preS != null){
-                try {
-                    preS.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if(con != null){
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+//            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, e);
+//        } finally {
+//            if(preS != null){
+//                try {
+//                    preS.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//            if(con != null){
+//                try {
+//                    con.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
         }
         // ket thuc
     }
     
-    public List<Product> searchByProducer() throws RemoteException{
+    public List<Product> searchByProducer (String producer) throws RemoteException{
         List<Product> com = new ArrayList<>();
         
         PreparedStatement preStm = null;
@@ -182,32 +181,32 @@ public class ProductCRUD extends UnicastRemoteObject implements ProductModify{
             // lay tat ca danh sach may tinh
             con = ConnectDB.getConnect();
             // query
-            String sql = "Select * From product Where producer like ?";
+            String sql = "Select * From product Where Producer like ?";
             preStm = con.prepareCall(sql);
             preStm.setString(1, "%" + producer + "%");
             
             ResultSet rs = preStm.executeQuery();
             while (rs.next()) {                
-                Product cpt = new Product(rs.getInt("id"), rs.getString("producer"), rs.getInt("price"), rs.getInt("typeID"));
+                Product cpt = new Product(rs.getInt("PID"), rs.getString("Producer"), rs.getInt("Price"), rs.getInt("TypeID"));
                 com.add(cpt);
             }
         } catch (SQLException e) {
-            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, e);
-        } finally {
-            if(preStm != null){
-                try {
-                    preStm.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if(con != null){
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+//            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, e);
+//        } finally {
+//            if(preStm != null){
+//                try {
+//                    preStm.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//            if(con != null){
+//                try {
+//                    con.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
         }
         // the end
         return com;
@@ -223,32 +222,32 @@ public class ProductCRUD extends UnicastRemoteObject implements ProductModify{
             // lay tat ca danh sach may tinh
             con = ConnectDB.getConnect();
             // query
-            String sql = "Select * From product Where id = ?";
+            String sql = "Select * From product Where PID = ?";
             preStm = con.prepareCall(sql);
             preStm.setInt(1, id);
             
             ResultSet rs = preStm.executeQuery();
             while (rs.next()) {                
-                Product cpt = new Product(rs.getInt("id"), rs.getString("producer"), rs.getInt("price"), rs.getInt("typeID"));
+                Product cpt = new Product(rs.getInt("PID"), rs.getString("Producer"), rs.getInt("Price"), rs.getInt("TypeID"));
                 com.add(cpt);
             }
         } catch (SQLException e) {
-            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, e);
-        } finally {
-            if(preStm != null){
-                try {
-                    preStm.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if(con != null){
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+//            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, e);
+//        } finally {
+//            if(preStm != null){
+//                try {
+//                    preStm.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//            if(con != null){
+//                try {
+//                    con.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(ProductCRUD.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
         }
         // the end
         return com;

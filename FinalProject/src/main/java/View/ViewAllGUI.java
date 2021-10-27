@@ -1,9 +1,10 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
 
+import ComputerShop.ConnectDB;
 import ComputerShop.PTypeModify;
 import ComputerShop.ProductModify;
 import ComputerShop.RegisterModify;
@@ -13,7 +14,6 @@ import Model.Register;
 import java.rmi.*;
 import java.rmi.registry.*;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Xuan040900
  */
-public class ViewAllGUI extends javax.swing.JInternalFrame {
+public class ViewAllGUI extends javax.swing.JFrame {
     DefaultTableModel tbm1,tbm2,tbm3;
     List<Register> reg = new ArrayList<>();
     List<PType> type = new ArrayList<>();
@@ -29,35 +29,38 @@ public class ViewAllGUI extends javax.swing.JInternalFrame {
     Connection con = null;
 
     /**
-     * Creates new form ViewAll
+     * Creates new form ViewAllGU
      */
     public ViewAllGUI() {
-        try {
-            Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            RegisterModify c = (RegisterModify)r.lookup("RegisterModify");
-            initComponents();
-            tbm1 = (DefaultTableModel) tbProduct.getModel();
-            tbm2 = (DefaultTableModel) tbType.getModel();
-            tbm3 = (DefaultTableModel) tbUser.getModel();
-            showUser();
-            showType();
-            showProduct();
-        } catch (NotBoundException | RemoteException e) {
-        }
+//        try {
+//            Registry r = LocateRegistry.getRegistry("localhost", 2000);
+//            
+//        } catch (RemoteException e) {
+//            java.util.logging.Logger.getLogger(ViewAllGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+//        }
+        initComponents();
+        con = ConnectDB.getConnect();
+        tbm1 = (DefaultTableModel) tbProduct.getModel();
+        tbm2 = (DefaultTableModel) tbType.getModel();
+        tbm3 = (DefaultTableModel) tbUser.getModel();
+        this.setLocationRelativeTo(null);
+        showUser();
+        showType();
+        showProduct();
     }
     
     public void showUser(){
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            RegisterModify c = (RegisterModify)r.lookup("RegisterModify");
+            RegisterModify c = (RegisterModify)r.lookup("rmiRegister");
             reg = c.findAll();
             tbm3.setRowCount(0);
             
-            for (Register register : reg) {
+            reg.forEach(register -> {
                 tbm3.addRow(new Object[] {
                     tbm3.getRowCount() + 1, register.getUsername(), register.getEmail(), register.getPassword(), register.getConfirm()
                 });
-            }
+            });
         } catch (NotBoundException | RemoteException e) {
             java.util.logging.Logger.getLogger(UserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
@@ -66,15 +69,15 @@ public class ViewAllGUI extends javax.swing.JInternalFrame {
     public void showType(){
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            PTypeModify c = (PTypeModify)r.lookup("PTypeModify");
+            PTypeModify c = (PTypeModify)r.lookup("rmiPType");
             type = c.findAll();
             tbm2.setRowCount(0);
             
-            for (PType pType : type) {
+            type.forEach(pType -> {
                 tbm2.addRow(new Object[] {
-                    tbm2.getRowCount() + 1, pType.getName()
+                    tbm2.getRowCount() + 1, pType.getType_name()
                 });
-            }
+            });
         } catch (NotBoundException | RemoteException e) {
             java.util.logging.Logger.getLogger(PTypeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
@@ -83,7 +86,7 @@ public class ViewAllGUI extends javax.swing.JInternalFrame {
     public void showProduct(){
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            ProductModify c = (ProductModify)r.lookup("ProductModify");
+            ProductModify c = (ProductModify)r.lookup("rmiProduct");
             pro = c.findAll();
             tbm1.setRowCount(0);
             
@@ -93,7 +96,7 @@ public class ViewAllGUI extends javax.swing.JInternalFrame {
                 });
             });
         } catch (NotBoundException | RemoteException e) {
-            java.util.logging.Logger.getLogger(ProductModify.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+            java.util.logging.Logger.getLogger(ProductGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
     }
 
@@ -106,22 +109,40 @@ public class ViewAllGUI extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbProduct = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbType = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tbUser = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbType = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbProduct = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tbUser = new javax.swing.JTable();
+        btnExit = new javax.swing.JButton();
 
-        setTitle("View All");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("Product_type");
+
+        tbType.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "TID", "Type_name"
+            }
+        ));
+        jScrollPane1.setViewportView(tbType);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("Product");
 
         tbProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -132,27 +153,13 @@ public class ViewAllGUI extends javax.swing.JInternalFrame {
                 "PID", "Producer", "Price", "TypeID"
             }
         ));
-        jScrollPane1.setViewportView(tbProduct);
+        jScrollPane2.setViewportView(tbProduct);
 
-        tbType.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "TID", "Type_name"
-            }
-        ));
-        jScrollPane2.setViewportView(tbType);
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("User");
 
         tbUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -163,16 +170,15 @@ public class ViewAllGUI extends javax.swing.JInternalFrame {
                 "ID", "Username", "Email", "Password", "Confirm"
             }
         ));
-        jScrollPane3.setViewportView(tbUser);
+        jScrollPane4.setViewportView(tbUser);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Product");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("Product_Type");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("User");
+        btnExit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnExit.setText("X");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,46 +187,95 @@ public class ViewAllGUI extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jLabel4)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 308, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExit))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addComponent(btnExit))
+                .addGap(11, 11, 11)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ViewAllGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ViewAllGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ViewAllGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ViewAllGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ViewAllGUI().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable tbProduct;
     private javax.swing.JTable tbType;
     private javax.swing.JTable tbUser;

@@ -5,25 +5,26 @@
 package Model;
 
 import Model.*;
+import java.io.Serializable;
 
 /**
  *
  * @author Xuan040900
  */
-public class PType {
+public class PType implements Serializable{
     int id;
-    String name;
+    String type_name;
 
     public PType() {
     }
 
-    public PType(int id, String name) {
+    public PType(int id, String type_name) {
         this.id = id;
-        this.name = name;
+        this.type_name = type_name;
     }
 
-    public PType(String name) {
-        this.name = name;
+    public PType(String type_name) {
+        this.type_name = type_name;
     }
 
     public int getId() {
@@ -34,12 +35,12 @@ public class PType {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getType_name() {
+        return type_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType_name(String type_name) {
+        this.type_name = type_name;
     }
-    
+     
 }

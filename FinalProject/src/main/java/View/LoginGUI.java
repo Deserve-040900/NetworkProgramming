@@ -179,6 +179,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Login successfully");
                 if (CheckBox.isSelected()) {
                     JOptionPane.showMessageDialog(this, "Your login information has been stored");
+                    dispose();
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid username and password", "Failure", JOptionPane.ERROR_MESSAGE);
@@ -207,12 +208,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-        try {
-            Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            dispose();
-        } catch (RemoteException e) {
-            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
-        }
+        this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     /**

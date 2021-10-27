@@ -4,14 +4,10 @@
  */
 package View;
 
-import ComputerShop.ConnectDB;
 import ComputerShop.ProductModify;
 import Model.Product;
 import java.rmi.*;
 import java.rmi.registry.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,25 +19,26 @@ import javax.swing.table.DefaultTableModel;
 public class ProductGUI extends javax.swing.JFrame {
     DefaultTableModel tbm;
     List<Product> pro = new ArrayList<>();
-    Connection con  = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
 
     /**
      * Creates new form ProductGUI
      */
     public ProductGUI() {
-        initComponents();
-        con = ConnectDB.getConnect();
-        this.setLocationRelativeTo(null);
-        tbm = (DefaultTableModel) tbProduct.getModel();
-        showProduct();
+        try {
+            Registry r = LocateRegistry.getRegistry("localhost", 2000);
+            initComponents();
+            this.setLocationRelativeTo(null);
+            tbm = (DefaultTableModel) tbProduct.getModel();
+            showProduct();
+        } catch (RemoteException e) {
+            java.util.logging.Logger.getLogger(ProductGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+        }
     }
     
     public void showProduct(){
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            ProductModify c = (ProductModify)r.lookup("ProductModify");
+            ProductModify c = (ProductModify)r.lookup("rmiProduct");
             pro = c.findAll();
             tbm.setRowCount(0);
             
@@ -51,7 +48,7 @@ public class ProductGUI extends javax.swing.JFrame {
                 });
             });
         } catch (NotBoundException | RemoteException e) {
-            java.util.logging.Logger.getLogger(ProductModify.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+            java.util.logging.Logger.getLogger(ProductGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
     }
 
@@ -256,27 +253,22 @@ public class ProductGUI extends javax.swing.JFrame {
             PTypeGUI obj = new PTypeGUI();
             obj.setVisible(true);
         } catch (RemoteException e) {
-            java.util.logging.Logger.getLogger(ProductModify.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+            java.util.logging.Logger.getLogger(ProductGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        try {
-            Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            dispose();
-        } catch (RemoteException e) {
-            java.util.logging.Logger.getLogger(ProductModify.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
-        }
+        this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            ProductModify c = (ProductModify)r.lookup("ProductModify");
+            ProductModify c = (ProductModify)r.lookup("rmiProduct");
             String producer = txtProducer.getText();
-            int price = Integer.parseInt(txtProducer.getText());
+            int price = Integer.parseInt(txtPrice.getText());
             int typeID = Integer.parseInt(txtIDtype.getText());
 
             Product pt = new Product(producer, price, typeID);
@@ -284,7 +276,7 @@ public class ProductGUI extends javax.swing.JFrame {
 
             showProduct();
         } catch (NumberFormatException | NotBoundException | RemoteException e) {
-            java.util.logging.Logger.getLogger(ProductModify.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+            java.util.logging.Logger.getLogger(ProductGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_btnCreateActionPerformed
 
@@ -292,7 +284,7 @@ public class ProductGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            ProductModify c = (ProductModify)r.lookup("ProductModify");
+            ProductModify c = (ProductModify)r.lookup("rmiProduct");
             int selectedIndex = tbProduct.getSelectedRow();
             if(selectedIndex >= 0){
                 Product cpt = pro.get(selectedIndex);
@@ -308,7 +300,7 @@ public class ProductGUI extends javax.swing.JFrame {
                 }
             }
         } catch (NotBoundException | RemoteException e) {
-            java.util.logging.Logger.getLogger(ProductModify.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+            java.util.logging.Logger.getLogger(ProductGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -320,7 +312,7 @@ public class ProductGUI extends javax.swing.JFrame {
             txtPrice.setText("");
             txtIDtype.setText("");
         } catch (RemoteException e) {
-            java.util.logging.Logger.getLogger(ProductModify.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+            java.util.logging.Logger.getLogger(ProductGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_btnResetActionPerformed
 
@@ -328,7 +320,7 @@ public class ProductGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            ProductModify c = (ProductModify)r.lookup("ProductModify");
+            ProductModify c = (ProductModify)r.lookup("rmiProduct");
             String find = txtSearch.getText();
             if(find != null && find.length() > 0){
                 pro = c.searchByProducer(find);
@@ -344,7 +336,7 @@ public class ProductGUI extends javax.swing.JFrame {
                 showProduct();
             }
         } catch (NotBoundException | RemoteException e) {
-            java.util.logging.Logger.getLogger(ProductModify.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+            java.util.logging.Logger.getLogger(ProductGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_btnSearchNameActionPerformed
 
@@ -352,7 +344,7 @@ public class ProductGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            ProductModify c = (ProductModify)r.lookup("ProductModify");
+            ProductModify c = (ProductModify)r.lookup("rmiProduct");
             String input = txtSearch.getText();
             if(input != null && input.length() > 0){
                 int index = Integer.parseInt(input);
@@ -369,7 +361,7 @@ public class ProductGUI extends javax.swing.JFrame {
                 showProduct();
             }
         } catch (NotBoundException | RemoteException e) {
-            java.util.logging.Logger.getLogger(ProductModify.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+            java.util.logging.Logger.getLogger(ProductGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_btnSearchIDActionPerformed
 
@@ -377,13 +369,13 @@ public class ProductGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Registry r = LocateRegistry.getRegistry("localhost", 2000);
-            ProductModify c = (ProductModify)r.lookup("ProductModify");
+            ProductModify c = (ProductModify)r.lookup("rmiProduct");
             int selectedIndex = tbProduct.getSelectedRow();
             if(selectedIndex >= 0){
                 Product cpt = pro.get(selectedIndex);
                 int id = cpt.getId();
                 String producer = txtProducer.getText();
-                int price = Integer.parseInt(txtProducer.getText());
+                int price = Integer.parseInt(txtPrice.getText());
                 int typeID = Integer.parseInt(txtIDtype.getText());
 
                 Product pt = new Product(id, producer, price, typeID);
@@ -393,7 +385,7 @@ public class ProductGUI extends javax.swing.JFrame {
             }
             
         } catch (NotBoundException | RemoteException e) {
-            java.util.logging.Logger.getLogger(ProductModify.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+            java.util.logging.Logger.getLogger(ProductGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
